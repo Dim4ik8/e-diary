@@ -1,16 +1,17 @@
 from random import choice
-from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
+
 
 def find_schoolkid(schoolkid):
     try:
         kid = Schoolkid.objects.get(full_name__contains=schoolkid)
-    except ObjectDoesNotExist:
+    except Schoolkid.DoesNotExist:
         print('Ученик не найден, попробуй еще раз')
         exit()
-    except MultipleObjectsReturned:
+    except Schoolkid.MultipleObjectsReturned:
         print(f'Найдено несколько учеников {schoolkid}, укажите конкретнее! ')
         exit()
     return kid
+
 
 def fix_marks(schoolkid):
     kid = find_schoolkid(schoolkid)
